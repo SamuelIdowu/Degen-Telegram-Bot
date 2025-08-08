@@ -1,11 +1,11 @@
-import { tokenMonitor } from './modules/tokenMonitor';
-import { rugChecker } from './modules/rugChecker';
-import { botConfig } from './core/config';
-import { logError } from './core/utils';
+import { tokenMonitor } from './modules/tokenMonitor.js';
+import { rugChecker } from './modules/rugChecker.js';
+import { botConfig } from './core/config.js';
+import { logError } from './core/utils.js';
 import chalk from 'chalk';
 
 // Import the telegram bot to start it
-import './bot/telegramBot';
+import './bot/telegramBot.js';
 
 console.log(chalk.blue('🚀 Starting Unified Solana Telegram Bot...'));
 

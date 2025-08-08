@@ -1,9 +1,9 @@
 import axios from 'axios';
 import chalk from 'chalk';
 import { EventEmitter } from 'events';
-import { RugCheckResult, TokenData } from '../types';
-import { botConfig } from '../core/config';
-import { logError, sleep } from '../core/utils';
+import { RugCheckResult, TokenData } from '../types/index.js';
+import { botConfig } from '../core/config.js';
+import { logError, sleep } from '../core/utils.js';
 
 export class RugChecker extends EventEmitter {
   private apiBaseUrl = 'https://api.rugcheck.xyz/v1';

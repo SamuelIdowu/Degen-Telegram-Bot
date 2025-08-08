@@ -1,9 +1,9 @@
 import { Connection } from '@solana/web3.js';
 import chalk from 'chalk';
 import path from 'path';
-import { rayFee, solanaConnection, RAYDIUM_LP_OWNER, SOL_MINT } from '../core/config';
-import { storeData, logError } from '../core/utils';
-import { TokenData } from '../types';
+import { rayFee, solanaConnection, RAYDIUM_LP_OWNER, SOL_MINT } from '../core/config.js';
+import { storeData, logError } from '../core/utils.js';
+import { TokenData } from '../types/index.js';
 import { EventEmitter } from 'events';
 
 export class TokenMonitor extends EventEmitter {

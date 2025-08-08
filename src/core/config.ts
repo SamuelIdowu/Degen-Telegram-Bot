@@ -1,13 +1,13 @@
 import { Connection, PublicKey } from '@solana/web3.js';
 import dotenv from 'dotenv';
-import { BotConfig } from '../types';
+import { BotConfig } from '../types/index.js';
 
 // Load environment variables from the .env file
 dotenv.config();
 
 // Solana Configuration
-const RPC_ENDPOINT = process.env.RPC_ENDPOINT ?? 'https://mainnet.helius-rpc.com/?api-key=cd716db1-6133-46b4-9f2f-59f5b72c329b';
-const RPC_WEBSOCKET_ENDPOINT = process.env.RPC_WEBSOCKET_ENDPOINT ?? 'wss://mainnet.helius-rpc.com/?api-key=cd716db1-6133-46b4-9f2f-59f5b72c329b';
+const RPC_ENDPOINT = process.env.RPC_ENDPOINT ?? 'https://api.mainnet-beta.solana.com';
+const RPC_WEBSOCKET_ENDPOINT = process.env.RPC_WEBSOCKET_ENDPOINT ?? 'wss://api.mainnet-beta.solana.com';
 
 // Establish the Solana connection
 export const solanaConnection = new Connection(RPC_ENDPOINT, {

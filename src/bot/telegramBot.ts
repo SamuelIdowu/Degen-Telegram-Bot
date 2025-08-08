@@ -1,9 +1,9 @@
 import TelegramBot from 'node-telegram-bot-api';
-import { BOT_TOKEN, ADMIN_CHAT_ID } from '../core/config';
-import { tokenMonitor } from '../modules/tokenMonitor';
-import { rugChecker } from '../modules/rugChecker';
-import { formatTokenInfo, getLatestTokens, findTokenByMint } from '../core/utils';
-import { TokenData } from '../types';
+import { BOT_TOKEN, ADMIN_CHAT_ID } from '../core/config.js';
+import { tokenMonitor } from '../modules/tokenMonitor.js';
+import { rugChecker } from '../modules/rugChecker.js';
+import { formatTokenInfo, getLatestTokens, findTokenByMint } from '../core/utils.js';
+import { TokenData } from '../types/index.js';
 import chalk from 'chalk';
 
 // Initialize the Telegram Bot

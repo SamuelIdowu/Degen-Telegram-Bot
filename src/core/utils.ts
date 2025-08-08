@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import { TokenData, RugCheckResult } from '../types';
+import { TokenData, RugCheckResult } from '../types/index.js';
 
 // Function to store data in a JSON file
 export async function storeData(filePath: string, data: any): Promise<void> {

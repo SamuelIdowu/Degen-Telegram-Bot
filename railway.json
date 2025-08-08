@@ -11,6 +11,9 @@
     "restartPolicyMaxRetries": 10
   },
   "variables": {
-    "NODE_ENV": "production"
+    "NODE_ENV": "production",
+    "MAX_RISK_SCORE": "50000",
+    "AUTO_SNIPE_ENABLED": "false",
+    "RUGCHECK_DELAY_MS": "1000"
   }
 }

@@ -3,13 +3,16 @@
   "version": "1.0.0",
   "description": "Unified Solana token tracker and rug checker with Telegram bot interface",
   "main": "dist/index.js",
+  "type": "module",
   "scripts": {
     "build": "tsc",
     "start": "node server.js",
     "dev": "npx tsx src/index.ts",
+    "dev:local": "npx dotenv -e .env.local npx tsx src/index.ts",
     "bot": "npx tsx src/bot/telegramBot.ts",
     "monitor": "npx tsx src/modules/tokenMonitor.ts",
-    "railway:start": "npm run build && npm start"
+    "railway:start": "npm run build && npm start",
+    "postinstall": "npm run build"
   },
   "dependencies": {
     "@solana/web3.js": "^1.95.5",

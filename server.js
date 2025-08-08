@@ -1,4 +1,4 @@
-const http = require("http");
+import http from "http";
 
 // Simple HTTP server to satisfy Render's port binding requirement
 const server = http.createServer((req, res) => {
@@ -59,10 +59,15 @@ server.on("error", (error) => {
 });
 
 // Import and start the main application
-try {
-  require("./dist/index.js");
-  console.log("✅ Bot application started successfully");
-} catch (error) {
-  console.error("❌ Failed to start bot application:", error);
-  process.exit(1);
+async function startBot() {
+  try {
+    await import("./dist/index.js");
+    console.log("✅ Bot application started successfully");
+  } catch (error) {
+    console.error("❌ Failed to start bot application:", error);
+    process.exit(1);
+  }
 }
+
+// Start the bot
+startBot();

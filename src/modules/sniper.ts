@@ -1,7 +1,7 @@
 import { Connection, PublicKey, Transaction, SystemProgram, LAMPORTS_PER_SOL } from '@solana/web3.js';
-import { TokenData } from '../types';
-import { solanaConnection } from '../core/config';
-import { logError } from '../core/utils';
+import { TokenData } from '../types/index.js';
+import { solanaConnection } from '../core/config.js';
+import { logError } from '../core/utils.js';
 import chalk from 'chalk';
 
 export class Sniper {
