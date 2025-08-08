@@ -34,7 +34,7 @@ export async function storeData(filePath: string, data: any): Promise<void> {
     fs.writeFileSync(filePath, JSON.stringify(currentData, null, 2));
     console.log(`Data stored successfully at ${filePath}`);
   } catch (error) {
-    console.error(`Error storing data: ${error.message}`);
+    console.error(`Error storing data: ${error instanceof Error ? error.message : String(error)}`);
     throw error;
   }
 }
@@ -49,7 +49,7 @@ export function readTokenData(filePath: string): TokenData[] {
     const rawData = fs.readFileSync(filePath, 'utf-8');
     return JSON.parse(rawData);
   } catch (error) {
-    console.error(`Error reading token data: ${error.message}`);
+    console.error(`Error reading token data: ${error instanceof Error ? error.message : String(error)}`);
     return [];
   }
 }
@@ -69,7 +69,7 @@ export function findTokenByMint(filePath: string, mintAddress: string): TokenDat
 }
 
 // Format risk level based on rug check score
-export function formatRiskLevel(rugCheckResult: RugCheckResult | null): string {
+export function formatRiskLevel(rugCheckResult: RugCheckResult | null | undefined): string {
   if (!rugCheckResult) return '❓ Unknown';
   
   const score = rugCheckResult.score;
@@ -121,7 +121,7 @@ export function sleep(ms: number): Promise<void> {
 // Error logging utility
 export function logError(error: any, context: string): void {
   const timestamp = new Date().toISOString();
-  const errorMessage = `[${timestamp}] ${context}: ${error.message || error}\n`;
+  const errorMessage = `[${timestamp}] ${context}: ${error instanceof Error ? error.message : String(error)}\n`;
   
   console.error(errorMessage);
   

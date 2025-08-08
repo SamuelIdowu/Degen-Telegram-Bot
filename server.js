@@ -39,12 +39,13 @@ const server = http.createServer((req, res) => {
   );
 });
 
-// Use the PORT environment variable that Render provides, or default to 3000
+// Use the PORT environment variable that Railway provides, or default to 3000
 const PORT = process.env.PORT || 3000;
 
 server.listen(PORT, () => {
   console.log(`🚀 HTTP server listening on port ${PORT}`);
   console.log(`📊 Health check available at: http://localhost:${PORT}`);
+  console.log(`🚂 Railway deployment ready`);
 });
 
 // Handle server errors

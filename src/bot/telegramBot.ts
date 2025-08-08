@@ -7,7 +7,7 @@ import { TokenData } from '../types';
 import chalk from 'chalk';
 
 // Initialize the Telegram Bot
-const bot = new TelegramBot(BOT_TOKEN, { polling: true });
+const bot = new TelegramBot(BOT_TOKEN!, { polling: true });
 
 // Command: /start
 bot.onText(/\/start/, (msg) => {
@@ -64,7 +64,7 @@ bot.onText(/\/snipe/, async (msg) => {
       
       // Analyze the token
       const analyzedToken = await rugChecker.analyzeToken(tokenData);
-      const riskAssessment = rugChecker.getRiskAssessment(analyzedToken.rugCheckResult);
+      const riskAssessment = rugChecker.getRiskAssessment(analyzedToken.rugCheckResult || null);
       
       // Create inline keyboard for approval
       const keyboard = {
@@ -124,7 +124,7 @@ bot.onText(/\/report (.+)/, async (msg, match) => {
         analyzedToken = await rugChecker.analyzeToken(token);
       }
       
-      const riskAssessment = rugChecker.getRiskAssessment(analyzedToken.rugCheckResult);
+      const riskAssessment = rugChecker.getRiskAssessment(analyzedToken.rugCheckResult || null);
       
       const reportMessage = `📊 **Token Report**
 

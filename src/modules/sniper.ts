@@ -52,7 +52,7 @@ export class Sniper {
       };
       
     } catch (error) {
-      const errorMessage = `Failed to execute snipe: ${error.message}`;
+      const errorMessage = `Failed to execute snipe: ${error instanceof Error ? error.message : String(error)}`;
       logError(error, 'Sniper execution');
       
       return {

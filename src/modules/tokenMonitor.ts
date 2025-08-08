@@ -83,7 +83,7 @@ export class TokenMonitor extends EventEmitter {
         }
       );
 
-      if (parsedTransaction && parsedTransaction?.meta?.err == null) {
+      if (parsedTransaction && parsedTransaction.meta && parsedTransaction.meta.err == null) {
         console.log(chalk.cyan(`📊 Successfully parsed transaction: ${signature}`));
 
         signer = parsedTransaction.transaction.message.accountKeys[0].pubkey.toString();

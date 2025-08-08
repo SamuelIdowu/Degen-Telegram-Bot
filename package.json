@@ -8,7 +8,8 @@
     "start": "node server.js",
     "dev": "npx tsx src/index.ts",
     "bot": "npx tsx src/bot/telegramBot.ts",
-    "monitor": "npx tsx src/modules/tokenMonitor.ts"
+    "monitor": "npx tsx src/modules/tokenMonitor.ts",
+    "railway:start": "npm run build && npm start"
   },
   "dependencies": {
     "@solana/web3.js": "^1.95.5",

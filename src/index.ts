@@ -18,7 +18,7 @@ tokenMonitor.on('newToken', async (tokenData) => {
     const analyzedToken = await rugChecker.analyzeToken(tokenData);
     
     // Check if token passes security filters
-    const isSafe = rugChecker.passesSecurityCheck(analyzedToken.rugCheckResult);
+    const isSafe = rugChecker.passesSecurityCheck(analyzedToken.rugCheckResult || null);
     
     if (isSafe && botConfig.autoSnipeEnabled) {
       console.log(chalk.green(`✅ Token ${analyzedToken.baseInfo.baseAddress} passed security check - ready for snipe!`));
