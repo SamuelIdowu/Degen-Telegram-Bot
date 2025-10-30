@@ -24,6 +24,7 @@ const server = http.createServer((req, res) => {
         uptime: process.uptime(),
         timestamp: new Date().toISOString(),
         environment: process.env.NODE_ENV || "development",
+        message: "Bot is monitoring for tokens"
       })
     );
     return;
@@ -39,14 +40,44 @@ const server = http.createServer((req, res) => {
   );
 });
 
-// Use the PORT environment variable that Railway provides, or default to 3000
+// Use the PORT environment variable that Render provides
 const PORT = process.env.PORT || 3000;
 
 server.listen(PORT, () => {
   console.log(`🚀 HTTP server listening on port ${PORT}`);
   console.log(`📊 Health check available at: http://localhost:${PORT}`);
-  console.log(`🚂 Railway deployment ready`);
+  console.log(`✅ Render deployment ready`);
 });
+
+// Keep alive function to ping our own endpoint
+function keepAlive() {
+  const options = {
+    host: 'localhost',
+    port: PORT,
+    path: '/health',
+    method: 'GET',
+    headers: {
+      'User-Agent': 'Solana-Bot-Keep-Alive'
+    }
+  };
+
+  const req = http.request(options, (res) => {
+    res.on('data', () => {}); // Consume the response data
+    res.on('end', () => {
+      console.log(`✅ Ping successful at ${new Date().toISOString()}`);
+    });
+  });
+
+  req.on('error', (e) => {
+    console.log(`❌ Ping error: ${e.message}`);
+  });
+
+  req.end();
+}
+
+// Send a ping every 14 minutes to keep the service awake
+setInterval(keepAlive, 14 * 60 * 1000);
+console.log('⏰ Keep-alive ping scheduled every 14 minutes');
 
 // Handle server errors
 server.on("error", (error) => {
@@ -63,6 +94,9 @@ async function startBot() {
   try {
     await import("./dist/index.js");
     console.log("✅ Bot application started successfully");
+    
+    // Start the keep-alive ping after the bot starts
+    keepAlive(); // Initial ping
   } catch (error) {
     console.error("❌ Failed to start bot application:", error);
     process.exit(1);

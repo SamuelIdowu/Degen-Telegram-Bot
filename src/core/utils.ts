@@ -54,18 +54,27 @@ export function readTokenData(filePath: string): TokenData[] {
   }
 }
 
-// Function to find latest tokens
-export function getLatestTokens(filePath: string, limit: number = 10): TokenData[] {
+// Function to get tokens from the last specified number of days
+export function getLatestTokens(filePath: string, limit: number = 10, maxDays: number = 2): TokenData[] {
   const tokens = readTokenData(filePath);
+  const cutoffDate = new Date();
+  cutoffDate.setDate(cutoffDate.getDate() - maxDays);
+  
   return tokens
+    .filter(token => new Date(token.timestamp) >= cutoffDate)
     .sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime())
     .slice(0, limit);
 }
 
-// Function to find token by mint address
-export function findTokenByMint(filePath: string, mintAddress: string): TokenData | null {
+// Function to find token by mint address (only from recent tokens)
+export function findTokenByMint(filePath: string, mintAddress: string, maxDays: number = 2): TokenData | null {
   const tokens = readTokenData(filePath);
-  return tokens.find(token => token.baseInfo.baseAddress === mintAddress) || null;
+  const cutoffDate = new Date();
+  cutoffDate.setDate(cutoffDate.getDate() - maxDays);
+  
+  return tokens
+    .filter(token => new Date(token.timestamp) >= cutoffDate)
+    .find(token => token.baseInfo.baseAddress === mintAddress) || null;
 }
 
 // Format risk level based on rug check score

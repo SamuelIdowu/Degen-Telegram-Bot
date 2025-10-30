@@ -9,6 +9,7 @@ A comprehensive Solana token monitoring and sniping bot with rug pull detection,
 - 🤖 **Telegram Bot Interface** - Easy-to-use commands for monitoring and sniping
 - 📊 **Risk Assessment** - Automatic scoring and recommendations
 - ⚡ **Sniper Module** - Automated trading execution (placeholder implementation)
+- ⭕ **Render Deployment Ready** - Pre-configured for free deployment with keep-alive mechanism
 
 ## Architecture
 
@@ -23,7 +24,10 @@ unified-solana-telegram-bot/
 │   ├── bot/           # Telegram bot interface
 │   └── types/         # TypeScript type definitions
 ├── data/              # Token data storage
-└── dist/              # Compiled JavaScript output
+├── dist/              # Compiled JavaScript output
+├── RENDER_DEPLOYMENT.md    # Deployment instructions for Render
+├── server.js          # HTTP server with keep-alive mechanism
+└── package.json       # Project dependencies and scripts
 ```
 
 ## Quick Start
@@ -46,7 +50,7 @@ cd unified-solana-telegram-bot
 npm install
 
 # Copy environment file
-cp env.example .env
+cp .env.example .env
 ```
 
 ### 3. Configuration
@@ -66,6 +70,7 @@ RPC_WEBSOCKET_ENDPOINT=wss://mainnet.helius-rpc.com/?api-key=your_api_key_here
 MAX_RISK_SCORE=50000
 AUTO_SNIPE_ENABLED=false
 RUGCHECK_DELAY_MS=1000
+NODE_ENV=production
 ```
 
 ### 4. Running the Bot
@@ -84,6 +89,17 @@ npm run bot
 # Run only monitoring
 npm run monitor
 ```
+
+## Deployment to Render (Free Tier)
+
+This bot is configured for free deployment on Render with a built-in keep-alive mechanism to prevent the service from sleeping. See `RENDER_DEPLOYMENT.md` for complete deployment instructions.
+
+### Render Deployment Features:
+- Built-in keep-alive ping mechanism (every 14 minutes)
+- Health check endpoint at `/health`
+- Automatic compilation during build
+- Environment variable support
+- Continuous operation capabilities
 
 ## Telegram Commands
 
@@ -185,12 +201,17 @@ Token data is stored in `data/tokens.json` with the following structure:
 2. **No tokens detected**: Verify RPC endpoint connectivity
 3. **RugCheck API errors**: Check rate limiting and API key
 4. **Build errors**: Ensure TypeScript is installed globally
+5. **Service sleeping on Render**: Verify keep-alive mechanism is working
 
 ### Logs
 
 - Console logs show real-time monitoring status
 - Error logs are saved to `data/error.log`
 - Token data is stored in `data/tokens.json`
+
+## Keep-Alive Mechanism
+
+This bot includes a built-in keep-alive mechanism that pings its own health endpoint every 14 minutes to prevent free tier services like Render from sleeping. This ensures continuous monitoring of Solana for new tokens.
 
 ## Security Considerations
 
